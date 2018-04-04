@@ -1,4 +1,4 @@
 #!/usr/bin/env ruby
 
-require "one_minute_test"
+require 'one_minute_test'
 OneMinuteTest::CLI.start(ARGV)
