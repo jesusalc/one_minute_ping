@@ -25,8 +25,8 @@ describe OneMinuteTestHelper do
 
   describe '#millis_diff' do
     it 'returns correct result' do
-      expect(OneMinuteTestHelper.millis_diff(@start, @finish)).to
-      eq(-9_346_500.0)
+      expect(OneMinuteTestHelper.millis_diff(@start, @finish))
+          .to eq(-9_346_500.0)
     end
   end
 
@@ -46,7 +46,8 @@ describe OneMinuteTestHelper do
     let(:deduction) { Time.now }
 
     it 'returns correct result' do
-      expect(OneMinuteTestHelper.wait_time(deduction, 400.00)).to be_between(-1, 2)
+      expect(OneMinuteTestHelper.wait_time(deduction,
+                                           400.00)).to be_between(-1, 2)
     end
   end
 
@@ -62,22 +63,6 @@ describe OneMinuteTestHelper do
 
     it 'returns correct result' do
       expect(OneMinuteTestHelper.millis_rounded(deduction)).to eq(500.936)
-    end
-  end
-
-  describe '#puts_output' do
-    let(:elapsed_time) { 60_018.422 }
-    it 'returns correct result' do
-      expect(OneMinuteTestHelper.puts_output(elapsed_time,
-                                             'website',
-                                             @mean_list)).to include('Server Hostname:      website')
-
-      expect(OneMinuteTestHelper.puts_output(elapsed_time,
-                                             'website',
-                                             @mean_list)).to include('Time taken for tests: 60.018 seconds')
-      expect(OneMinuteTestHelper.puts_output(elapsed_time,
-                                             'website',
-                                             @mean_list)).to include('Time per request:     500.936 [ms] (mean, across all concurrent requests)')
     end
   end
 
