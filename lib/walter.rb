@@ -22,11 +22,7 @@ module Walter
 
       6.times do
         deduction_milliseconds_start = Time.now
-
-        hide_stdout do
-          HTTP.get(website)
-        end
-
+        hide_stdout { HTTP.get(website) }
         mean_list << Sniffer.data[access_index].response.timing
         access_index += 1
         deduction_elapsed_time = milliseconds_difference.(deduction_milliseconds_start,  Time.now)
@@ -51,6 +47,7 @@ module Walter
       puts "Time taken for tests: " + seconds.(elapsed_time).to_s + " seconds"
       average = (mean_list.inject(&:+).to_f) / mean_list.size.to_f
       puts "Time per request:     " +  rounded_milliseconds.(average).to_s + " [ms] (mean, across all concurrent requests)"
+      puts ""
     end
 
     def hide_stdout
