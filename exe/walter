@@ -1,4 +1,0 @@
-#!/usr/bin/env ruby
-
-require "walter"
-Walter::CLI.start(ARGV)
