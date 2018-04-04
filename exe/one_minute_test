@@ -1,0 +1,4 @@
+#!/usr/bin/env ruby
+
+require "one_minute_test"
+Walter::CLI.start(ARGV)
