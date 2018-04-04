@@ -11,11 +11,8 @@ module Walter
 
     desc "prob [website]", "prob any site for 1 minute with 10 second intervals"
     def prob(website)
-
       milliseconds_difference = -> start, finish { (finish - start) * 1000.0 }
       seconds_difference = -> start, finish { (finish - start) / 1000.0 }
-      seconds = -> milliseconds { (milliseconds / 1000).round(3) }
-      rounded_milliseconds = -> milliseconds { (milliseconds * 1000).round(3) }
       milliseconds_start = Time.now
       access_index = 0
       ten_milliseconds = 10000.00
@@ -38,18 +35,23 @@ module Walter
       end
 
       Sniffer.disable!
-
       elapsed_time = milliseconds_difference.(milliseconds_start,  Time.now)
+      output mean_list, elapsed_time, website
+    end
+
+    private
+
+    def output(mean_list, elapsed_time, website)
+      seconds = -> milliseconds { (milliseconds / 1000).round(3) }
+      rounded_milliseconds = -> milliseconds { (milliseconds * 1000).round(3) }
+
       puts ""
       puts "Server Hostname:      " + website
       puts ""
       puts "Time taken for tests: " + seconds.(elapsed_time).to_s + " seconds"
       average = (mean_list.inject(&:+).to_f) / mean_list.size.to_f
       puts "Time per request:     " +  rounded_milliseconds.(average).to_s + " [ms] (mean, across all concurrent requests)"
-
     end
-
-    private
 
     def hide_stdout
       begin
