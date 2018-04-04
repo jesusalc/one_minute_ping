@@ -1,16 +1,14 @@
-require 'walter/version'
+require 'one_minute_test/version'
 require 'thor'
 require 'one_minute_test'
 require 'http'
 require 'sniffer'
 
-
-# Looking to imitate: ab -k -c 1 -n 1 -t 60 -s 10 https://www.gitlab.com/
 module OneMinuteTest
   class CLI < Thor
 
-    desc "prob [website]", "prob any site for 1 minute with 10 second intervals"
-    def prob(website)
+    desc "site [website]", "website name like https://gitlab.com or https://about.gitlab.com "
+    def site(website)
       milliseconds_difference = -> start, finish { (finish - start) * 1000.0 }
       seconds_difference = -> start, finish { (finish - start) / 1000.0 }
       milliseconds_start = Time.now

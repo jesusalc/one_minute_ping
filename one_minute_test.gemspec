@@ -1,17 +1,17 @@
 # coding: utf-8
 lib = File.expand_path('../lib', __FILE__)
 $LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
-require 'walter/version'
+require 'one_minute_test/version'
 
 Gem::Specification.new do |spec|
   spec.name          = "one_minute_test"
-  spec.version       = Walter::VERSION
+  spec.version       = OneMinuteTest::VERSION
   spec.authors       = ["jesusalc"]
   spec.email         = ["jesusalc@gmail.com"]
 
-  spec.summary       = %q{Test gem to do a cli.}
-  spec.description   = %q{THIS GEM IS A SAMPLE OF A CLI GEM using thor gem as helper.}
-  spec.homepage      = "TODO: Put your gem's website or public repo URL here."
+  spec.summary       = %q{A small ruby gem that exposes a cli to check status of a website.}
+  spec.description   = %q{After probing the website for one minute every ten seconds it prints the average response time.}
+  spec.homepage      = "https://gitlab.com/jesusalc/one_minute_test"
 
   # Prevent pushing this gem to RubyGems.org. To allow pushes either set the 'allowed_push_host'
   # to allow pushing to a single host or delete this section to allow pushing to any host.
