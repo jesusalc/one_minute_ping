@@ -65,7 +65,7 @@ module OneMinuteTest
       puts "\nTime taken for tests: " + seconds(elapsed_time).to_s +
            ' seconds'
       puts 'Time per request:     ' + calculate_average.to_s +
-           " [ms] (mean, across all concurrent requests) \n"
+           " [ms] (mean, across all concurrent requests) \n\n"
     end
 
     def calculate_average
