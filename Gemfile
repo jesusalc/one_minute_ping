@@ -4,4 +4,3 @@ source 'https://rubygems.org'
 gemspec
 gem 'http'
 gem 'sniffer'
-gem 'rufus-scheduler'
