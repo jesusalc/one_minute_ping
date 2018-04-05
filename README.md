@@ -81,7 +81,7 @@ Bug reports and pull requests are welcome on GitHub at https://gitlab.com/jesusa
 
 1. Create your feature branch (`git checkout -b my-new-feature`)
 2. Create tests (`rake`)
-3. Pass your tests (`rake`)
+3. Pass your tests (`deep-cover exec rspec`)
 4. Check with Rubocop (`bundle exec rubocop -a`)
 5. Commit your changes (`git commit -am "Add some feature"`)
 6. Push to the branch (`git push origin my-new-feature`)
