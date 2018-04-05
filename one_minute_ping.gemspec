@@ -34,10 +34,13 @@ Gem::Specification.new do |spec|
 
   spec.add_development_dependency "bundler", "~> 1.13"
   spec.add_development_dependency "byebug"
+  spec.add_development_dependency 'coveralls',  '~> 0.8.21'
+  spec.add_development_dependency "deep-cover"
   spec.add_development_dependency "pry-byebug"
   spec.add_development_dependency "rake", "~> 10.0"
   spec.add_development_dependency "rspec"
   spec.add_development_dependency "rubocop"
+  spec.add_development_dependency "simplecov"
   spec.add_dependency "http"
   spec.add_dependency "sniffer"
   spec.add_dependency "thor", "~> 0.20"
