@@ -1,7 +1,4 @@
 source 'https://rubygems.org'
 
-# Specify your gem's dependencies in one_minute_test.gemspec
+# Specify your gem's dependencies in one_minute_ping.gemspec
 gemspec
-gem 'http'
-gem 'rubocop'
-gem 'sniffer'

@@ -1,4 +1,4 @@
-# One Minute Test
+# One Minute Ping
 
 A small ruby gem that exposes a cli to check status of a website.
 After probing the website for one minute every ten seconds it prints the average response time.
@@ -16,7 +16,7 @@ ab -k -c 1 -n 1 -t 60 -s 10 https://www.gitlab.com/
 Add this line to your application's Gemfile:
 
 ```ruby
-gem 'one_minute_test'
+gem 'one_minute_ping'
 ```
 
 And then execute:
@@ -28,14 +28,14 @@ bundle
 Or install it yourself as:
 
 ```bash
-gem install one_minute_test
+gem install one_minute_ping
 ```
 
 
 ## Usage
 
 ```bash
-bundle exec exe/one_minute_test site https://www.gitlab.com/
+bundle exec exe/one_minute_ping for https://www.gitlab.com/
 ```
 Sample Output:
 
@@ -45,7 +45,7 @@ Sample Output:
     Time per request:     509.686 [ms] (mean, across all concurrent requests)
 
 ```bash
-bundle exec exe/one_minute_test site https://www.about.gitlab.com/
+bundle exec exe/one_minute_ping for https://www.about.gitlab.com/
 ```
 
 Would Output:
@@ -75,7 +75,7 @@ and push the `.gem` file to [rubygems.org](https://rubygems.org).
 
 ## Bug Reports
 
-Bug reports and pull requests are welcome on GitHub at https://gitlab.com/jesusalc/one_minute_test/issues
+Bug reports and pull requests are welcome on GitHub at https://gitlab.com/jesusalc/one_minute_ping/issues
 
 ## Contributing
 

@@ -6,7 +6,7 @@ ENV['TEST'] = '1'
 require 'pp'
 
 root = File.expand_path('..', __dir__)
-require "#{root}/lib/one_minute_test"
+require "#{root}/lib/one_minute_ping"
 
 module Helpers
   def execute(cmd)

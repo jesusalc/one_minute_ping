@@ -1,0 +1,28 @@
+AllCops:
+  DisplayCopNames: true
+  DisplayStyleGuide: true
+
+  TargetRubyVersion: 2.2
+
+Lint/Debugger:
+  Exclude:
+    - test/examples/*.rb
+
+Metrics/AbcSize:
+  Enabled: false
+
+Metrics/MethodLength:
+  Enabled: false
+
+Naming/FileName:
+  Exclude:
+    - lib/pry-byebug.rb
+
+Style/ModuleFunction:
+  Enabled: false
+
+Style/StringLiterals:
+  EnforcedStyle: double_quotes
+
+Layout/ExtraSpacing:
+  AllowForAlignment: false
