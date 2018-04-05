@@ -1,8 +1,19 @@
 ENV['TEST'] = '1'
 require 'deep-cover' # Must be before the environment is loaded on the next line
 # require "deep_cover/builtin_takeover" # Must be before the environment is loaded on the next line
-# require "simplecov"
-# SimpleCov.start
+
+require 'simplecov'
+if ENV['COVERALLS_REPO_TOKEN']
+  require 'coveralls'
+  SimpleCov.formatter = Coveralls::SimpleCov::Formatter
+end
+SimpleCov.at_exit do
+  SimpleCov.result.format!
+end
+SimpleCov.start do
+  add_filter '/spec/'
+  add_filter 'vendor'
+end
 
 require 'pp'
 require 'open3'
