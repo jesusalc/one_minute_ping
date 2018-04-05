@@ -1,16 +1,16 @@
-require "one_minute_ping/version"
-require "thor"
-require "one_minute_ping"
-require "http"
-require "sniffer"
-require "one_minute_ping/helper"
+require 'one_minute_ping/version'
+require 'thor'
+require 'one_minute_ping'
+require 'http'
+require 'sniffer'
+require 'one_minute_ping/helper'
 
 # This the main procedure. Expects one string for website
 # name pings and outputs average response time.
 module OneMinutePing
   # Uses help from the thor gem
   class CLI < Thor
-    desc "for [website]", "website name like https://www.gitlab.com\n"
+    desc 'for [website]', "website name like https://www.gitlab.com\n"
     def for(website)
       @website = website
       time_start = Time.now

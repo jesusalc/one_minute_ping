@@ -1,4 +1,4 @@
 #!/usr/bin/env ruby
 
-require "one_minute_ping"
+require 'one_minute_ping'
 OneMinutePing::CLI.start(ARGV)
