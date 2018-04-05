@@ -56,6 +56,40 @@ Would Output:
     Time per request:     660.068 [ms] (mean, across all concurrent requests)
 
 
+## Generate GEM
+
+```bash
+rake build
+```
+
+## Install CLI
+
+```bash
+rake install 
+```
+After install there should be a new CLI command:
+
+```bash
+one_minute_ping
+```
+
+which now you can call simply:
+```bash
+one_minute_ping for https://www.about.gitlab.com/
+```
+
+## Run Tests
+
+```bash
+rake
+```
+and with coverage 
+```bash
+deep-cover exec rspec
+```
+
+
+
 ## Development
 
 After checking out the repo, run `bin/setup` 
