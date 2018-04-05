@@ -26,7 +26,7 @@ describe Helper do
   describe '#millis_diff' do
     it 'returns correct result' do
       expect(Helper.millis_diff(@start, @finish))
-          .to eq(-9_346_500.0)
+        .to eq(-9_346_500.0)
     end
   end
 
@@ -47,7 +47,7 @@ describe Helper do
 
     it 'returns correct result' do
       expect(Helper.wait_time(deduction,
-                                           400.00)).to be_between(-1, 2)
+                              400.00)).to be_between(-1, 2)
     end
   end
 
