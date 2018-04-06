@@ -60,7 +60,9 @@ describe OneMinutePing::CLI do
       expect(stderr).to eq('')
       expect(stdout).to \
         include('Server Hostname:      https://www.gitlab.com/')
+      expect(stdout).to include('Counted requests:     6')
       expect(stdout).to include('Time taken for tests:')
+      expect(stdout).to include('Time for status')
       expect(stdout).to include('Time per request:')
     end
 
@@ -71,7 +73,9 @@ describe OneMinutePing::CLI do
       expect(stderr).to eq('')
       expect(stdout).to \
         include('Server Hostname:      https://www.about.gitlab.com/')
+      expect(stdout).to include('Counted requests:     6')
       expect(stdout).to include('Time taken for tests:')
+      expect(stdout).to include('Time for status')
       expect(stdout).to include('Time per request:')
     end
   end
