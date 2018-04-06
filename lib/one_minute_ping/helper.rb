@@ -1,5 +1,10 @@
 # Helper class to use be used by OneMinutePing module
 class Helper
+  def self.view(time_start, website, mean_list)
+    elapsed_time = Helper.millis_diff(time_start, Time.now)
+    puts Helper.construct_output Helper.seconds(elapsed_time), website, Helper.calculate_average(mean_list)
+  end
+
   def self.seconds_diff(start, finish)
     (finish - start) / 1000.0
   end
