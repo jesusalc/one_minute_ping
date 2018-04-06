@@ -41,8 +41,11 @@ Sample Output:
 
     Server Hostname:      https://www.gitlab.com/
     
-    Time taken for tests: 60.007 seconds
-    Time per request:     509.686 [ms] (mean, across all concurrent requests)
+    Counted requests:     6
+    Time taken for tests: 6.025 seconds
+    
+    Time for status 308:  561.648 [ms] (mean, only per all responses with status 308)
+    Time per request:     561.648 [ms] (mean, across all concurrent requests)
 
 ```bash
 bundle exec exe/one_minute_ping for https://www.about.gitlab.com/
@@ -52,9 +55,11 @@ Would Output:
 
     Server Hostname:      https://www.about.gitlab.com/
     
-    Time taken for tests: 60.018 seconds
-    Time per request:     660.068 [ms] (mean, across all concurrent requests)
-
+    Counted requests:     6
+    Time taken for tests: 6.025 seconds
+    
+    Time for status 308:  561.648 [ms] (mean, only per all responses with status 308)
+    Time per request:     561.648 [ms] (mean, across all concurrent requests)
 
 ## Generate GEM
 
