@@ -1,8 +1,42 @@
 # Helper class to use be used by OneMinutePing module
 class Helper
-  def self.view(time_start, website, mean_list)
+  # rubocop:disable Metrics/AbcSize
+  def self.check_status
+    i = 0
+    responses = []
+    6.times do
+      deduction_time_start = Time.now
+      yield
+      responses.push(Sniffer.data[i].response.status => Sniffer.data[i].response.timing) if !Sniffer.data.nil? && !Sniffer.data[i].nil?
+      i += 1
+      wait_time(deduction_time_start, 10_000.00)
+    end
+    responses
+  end
+
+  def self.calculate_average(responses)
+    total_avg = millis_rounded(responses.map(&:first).map(&:last).inject(&:+).to_f / responses.size.to_f)
+    averages = { total_avg: total_avg, count: responses.size, group: {}, results: {} }
+    responses.each do |response|
+      response.keys.each do |key|
+        if !averages[:group].key?(key)
+          averages[:group][key] = [response[key]]
+        else
+          averages[:group][key].push(response[key])
+        end
+      end
+    end
+    averages[:group].keys.sort.each do |key|
+      averages[:results][key] = millis_rounded(averages[:group][key].inject(&:+).to_f / averages[:group][key].size.to_f)
+    end
+    averages
+  end
+
+  # rubocop:enable Metrics/AbcSize
+  #
+  def self.view(time_start, website, responses)
     elapsed_time = Helper.millis_diff(time_start, Time.now)
-    puts Helper.construct_output Helper.seconds(elapsed_time), website, Helper.calculate_average(mean_list)
+    puts Helper.construct_output Helper.seconds(elapsed_time), website, Helper.calculate_average(responses)
   end
 
   def self.seconds_diff(start, finish)
@@ -13,21 +47,6 @@ class Helper
     (finish - start) * 1000.0
   end
 
-  # rubocop:disable Metrics/AbcSize
-  def self.check_status
-    access_index = 0
-    mean_list = []
-    6.times do
-      deduction_time_start = Time.now
-      yield
-      mean_list.push(Sniffer.data[access_index].response.timing) if !Sniffer.data.nil? && !Sniffer.data[access_index].nil?
-      access_index += 1
-      wait_time(deduction_time_start, 10_000.00)
-    end
-    mean_list
-  end
-  # rubocop:enable Metrics/AbcSize
-
   def self.wait_time(deduction_time_start, ten_milliseconds)
     deduction_elapsed_time = millis_diff(deduction_time_start, Time.now)
     duration = seconds_diff(ten_milliseconds, deduction_elapsed_time).abs
@@ -35,23 +54,23 @@ class Helper
   end
 
   def self.seconds(milliseconds)
-    (milliseconds / 1000).round(3)
+    (milliseconds / 1000.0).round(3)
   end
 
   def self.millis_rounded(milliseconds)
-    (milliseconds * 1000).round(3)
+    (milliseconds * 1000.0).round(3)
   end
 
-  def self.construct_output(seconds, website, average)
-    "\nServer Hostname:      #{website}" \
-     "\n\nTime taken for tests: #{seconds}" \
-     ' seconds' \
-     "\nTime per request:     #{average}" \
-     " [ms] (mean, across all concurrent requests) \n\n"
-  end
-
-  def self.calculate_average(mean_list)
-    millis_rounded(mean_list.inject(&:+).to_f / mean_list.size.to_f)
+  def self.construct_output(secs, website, averages)
+    res = "\nServer Hostname:      #{website}" \
+        "\n\nCounted requests:     #{averages[:count]}" \
+          "\nTime taken for tests: #{secs} seconds\n"
+    averages[:results].keys.each do |key|
+      res += "\nTime for status #{key}:  #{averages[:results][key]}" \
+               " [ms] (mean, only per all responses with status #{key})"
+    end
+    res + "\nTime per request:     #{averages[:total_avg]}" \
+             " [ms] (mean, across all concurrent requests) \n\n"
   end
 
   def self.begin_hide_stdout
