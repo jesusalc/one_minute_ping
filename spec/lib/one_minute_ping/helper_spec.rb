@@ -19,10 +19,10 @@ describe Helper do
   describe '#view' do
     it 'returns correct result' do
       printed = capture_stdout do
-        Helper.view(Time.at(1514761200.0), 'none.com', @mean_list)
+        Helper.view(Time.at(1_514_761_200.0), 'none.com', @mean_list)
       end
       expect(printed).to include("\nServer Hostname:      none.com\n\n")
-      expect(printed).to include("Time taken for tests: ")
+      expect(printed).to include('Time taken for tests: ')
       expect(printed).to include('Time per request:     500.936 [ms] ')
       expect(printed).to include("(mean, across all concurrent requests) \n\n")
     end

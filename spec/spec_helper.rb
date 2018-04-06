@@ -17,6 +17,7 @@ end
 
 require 'pp'
 require 'open3'
+require 'stringio'
 
 root = File.expand_path('..', __dir__)
 require "#{root}/lib/one_minute_ping"
@@ -28,28 +29,26 @@ module Helpers
     puts stdout if ENV['DEBUG']
     [stdout, stderr, status]
   end
+
+  def capture_stdout
+    old = $stdout
+    $stdout = fake = StringIO.new
+    yield
+    fake.string
+  ensure
+    $stdout = old
+  end
+
+  def capture_stderr
+    old = $stderr
+    $stderr = fake = StringIO.new
+    yield
+    fake.string
+  ensure
+    $stderr = old
+  end
 end
 
 RSpec.configure do |c|
   c.include Helpers
-end
-
-require 'stringio'
-
-def capture_stdout(&blk)
-  old = $stdout
-  $stdout = fake = StringIO.new
-  blk.call
-  fake.string
-ensure
-  $stdout = old
-end
-
-def capture_stderr(&blk)
-  old = $stderr
-  $stderr = fake = StringIO.new
-  blk.call
-  fake.string
-ensure
-  $stderr = old
 end
