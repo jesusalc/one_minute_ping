@@ -13,11 +13,11 @@ module OneMinutePing
     def for(website)
       time_start = Time.now
       Sniffer.enable!
-      mean_list = Helper.check_status do
+      responses = Helper.check_status do
         Helper.hide_stdout { HTTP.get(website) }
       end
       Sniffer.disable!
-      Helper.view(time_start, website, mean_list)
+      Helper.view(time_start, website, responses)
     end
   end
 end
