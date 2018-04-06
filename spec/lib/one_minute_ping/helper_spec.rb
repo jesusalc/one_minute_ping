@@ -16,6 +16,18 @@ describe Helper do
                   0.49944399999731104, 0.49976299999980256]
   end
 
+  describe '#view' do
+    it 'returns correct result' do
+      printed = capture_stdout do
+        Helper.view(Time.at(1514761200.0), 'none.com', @mean_list)
+      end
+      expect(printed).to include("\nServer Hostname:      none.com\n\n")
+      expect(printed).to include("Time taken for tests: ")
+      expect(printed).to include('Time per request:     500.936 [ms] ')
+      expect(printed).to include("(mean, across all concurrent requests) \n\n")
+    end
+  end
+
   describe '#seconds_diff' do
     it 'returns correct result' do
       expect(Helper.seconds_diff(@start, @finish)).to eq(-9.3465)
