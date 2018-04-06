@@ -21,9 +21,8 @@ class Helper
     end
     mean_list
   end
-
   # rubocop:enable Metrics/AbcSize
-  #
+
   def self.wait_time(deduction_time_start, ten_milliseconds)
     deduction_elapsed_time = millis_diff(deduction_time_start, Time.now)
     duration = seconds_diff(ten_milliseconds, deduction_elapsed_time).abs
@@ -38,12 +37,12 @@ class Helper
     (milliseconds * 1000).round(3)
   end
 
-  def self.puts_output(elapsed_time, website, mean_list)
-    puts "\nServer Hostname:      " + website
-    puts "\nTime taken for tests: " + seconds(elapsed_time).to_s +
-         ' seconds'
-    puts 'Time per request:     ' + calculate_average(mean_list).to_s +
-         " [ms] (mean, across all concurrent requests) \n\n"
+  def self.construct_output(seconds, website, average)
+    "\nServer Hostname:      #{website}" \
+     "\n\nTime taken for tests: #{seconds}" \
+     ' seconds' \
+     "\nTime per request:     #{average}" \
+     " [ms] (mean, across all concurrent requests) \n\n"
   end
 
   def self.calculate_average(mean_list)

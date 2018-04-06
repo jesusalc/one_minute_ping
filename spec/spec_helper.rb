@@ -1,6 +1,6 @@
 ENV['TEST'] = '1'
 require 'deep-cover' # Must be before the environment is loaded on the next line
-# require "deep_cover/builtin_takeover" # Must be before the environment is loaded on the next line
+require 'deep_cover/builtin_takeover' # Must be before the environment is loaded on the next line
 
 require 'simplecov'
 if ENV['COVERALLS_REPO_TOKEN']

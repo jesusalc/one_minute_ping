@@ -20,7 +20,7 @@ module OneMinutePing
       end
       Sniffer.disable!
       elapsed_time = Helper.millis_diff(time_start, Time.now)
-      Helper.puts_output elapsed_time, @website, @mean_list
+      puts Helper.construct_output Helper.seconds(elapsed_time), @website, Helper.calculate_average(@mean_list)
     end
   end
 end

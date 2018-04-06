@@ -70,4 +70,14 @@ describe Helper do
       expect(Helper.calculate_average(@mean_list)).to eq(500.936)
     end
   end
+
+  describe '#construct_output' do
+    it 'returns correct string' do
+      expect(Helper.construct_output(60.027, 'none.com', 500.936))
+        .to eq("\nServer Hostname:      none.com\n\n" \
+                     "Time taken for tests: 60.027 seconds\n" \
+                     'Time per request:     500.936 [ms] ' \
+                     "(mean, across all concurrent requests) \n\n")
+    end
+  end
 end
