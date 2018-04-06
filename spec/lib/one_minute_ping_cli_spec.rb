@@ -11,6 +11,16 @@ describe OneMinutePing::CLI do
   end
 
   describe 'one_minute_ping' do
+
+    it '#for calling it empty args fails' do
+      begin
+        expect{ OneMinutePing::CLI.new.for('') }.to raise_error(HTTP::Request::UnsupportedSchemeError)
+      rescue Exception => e
+        expect{ e.class }.to eq(HTTP::Request::UnsupportedSchemeError)
+        expect{ e.message }.to eq('unknown scheme:')
+      end
+    end
+
     it '#for missing [website] shows command tip' do
       stdout, stderr, status = execute('exe/one_minute_ping ' + @args + ' ')
       expect(status).to be_a(Process::Status)
@@ -35,35 +45,35 @@ describe OneMinutePing::CLI do
                                  'or one specif')
     end
 
-    it '#help for command ' do
-      stdout, stderr, status = execute('exe/one_minute_ping help ' + @args)
-      expect(status).to be_a(Process::Status)
-      expect(stderr).to eq('')
-      expect(stdout).to include('Usage:')
-      expect(stdout).to include('one_minute_ping ' + @args + ' [website]')
-      expect(stdout).to include('website name like https://www.gitlab.com')
-    end
-
-    it '#for should work with https://www.gitlab.com/' do
-      stdout, stderr, status = execute('exe/one_minute_ping ' \
-                        "#{@args} https://www.gitlab.com/")
-      expect(status).to be_a(Process::Status)
-      expect(stderr).to eq('')
-      expect(stdout).to \
-        include('Server Hostname:      https://www.gitlab.com/')
-      expect(stdout).to include('Time taken for tests:')
-      expect(stdout).to include('Time per request:')
-    end
-
-    it '#for should work with https://www.about.gitlab.com/' do
-      stdout, stderr, status = execute('exe/one_minute_ping ' \
-                        "#{@args} https://www.about.gitlab.com/")
-      expect(status).to be_a(Process::Status)
-      expect(stderr).to eq('')
-      expect(stdout).to \
-        include('Server Hostname:      https://www.about.gitlab.com/')
-      expect(stdout).to include('Time taken for tests:')
-      expect(stdout).to include('Time per request:')
-    end
+    # it '#help for command ' do
+    #   stdout, stderr, status = execute('exe/one_minute_ping help ' + @args)
+    #   expect(status).to be_a(Process::Status)
+    #   expect(stderr).to eq('')
+    #   expect(stdout).to include('Usage:')
+    #   expect(stdout).to include('one_minute_ping ' + @args + ' [website]')
+    #   expect(stdout).to include('website name like https://www.gitlab.com')
+    # end
+    #
+    # it '#for should work with https://www.gitlab.com/' do
+    #   stdout, stderr, status = execute('exe/one_minute_ping ' \
+    #                     "#{@args} https://www.gitlab.com/")
+    #   expect(status).to be_a(Process::Status)
+    #   expect(stderr).to eq('')
+    #   expect(stdout).to \
+    #     include('Server Hostname:      https://www.gitlab.com/')
+    #   expect(stdout).to include('Time taken for tests:')
+    #   expect(stdout).to include('Time per request:')
+    # end
+    #
+    # it '#for should work with https://www.about.gitlab.com/' do
+    #   stdout, stderr, status = execute('exe/one_minute_ping ' \
+    #                     "#{@args} https://www.about.gitlab.com/")
+    #   expect(status).to be_a(Process::Status)
+    #   expect(stderr).to eq('')
+    #   expect(stdout).to \
+    #     include('Server Hostname:      https://www.about.gitlab.com/')
+    #   expect(stdout).to include('Time taken for tests:')
+    #   expect(stdout).to include('Time per request:')
+    # end
   end
 end
