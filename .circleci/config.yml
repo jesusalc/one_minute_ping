@@ -43,22 +43,22 @@ jobs:
       # - run: bundle exec rake db:schema:load
 
       # run tests!
-      - run:
-          name: Setup Code Climate test-reporter
-          command: |
-            curl -L https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64 > ./cc-test-reporter
-            chmod +x ./cc-test-reporter
       # - run:
-      #    name: run tests
+      #    name: Setup Code Climate test-reporter
       #    command: |
-      #      mkdir /tmp/test-results
-      #      bundle exec rake
+      #      curl -L https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64 > ./cc-test-reporter
+      #      chmod +x ./cc-test-reporter
       - run:
-          name: Run tests
+         name: run tests
           command: |
-            ./cc-test-reporter before-build
-            bundle exec rspec
-            ./cc-test-reporter after-build --coverage-input-type clover --exit-code $?
+            mkdir /tmp/test-results
+            bundle exec rake
+      # - run:
+      #    name: Run tests
+      #    command: |
+      #      ./cc-test-reporter before-build
+      #      bundle exec rspec
+      #      ./cc-test-reporter after-build --coverage-input-type clover --exit-code $?
       # collect reports
       # - store_test_results:
       #    path: ~/repo/coverage/
