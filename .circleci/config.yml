@@ -20,11 +20,11 @@ jobs:
       - checkout
 
       # Download and cache dependencies
-      - restore_cache:
-          keys:
-          - v1-dependencies-{{ checksum "Gemfile.lock" }}
+      # - restore_cache:
+      #    keys:
+          # - v1-dependencies-{{ checksum "Gemfile.lock" }}
           # fallback to using the latest cache if no exact match is found
-          - v1-dependencies-
+          # - v1-dependencies-
 
       - run:
           name: install dependencies
@@ -45,17 +45,11 @@ jobs:
           name: run tests
           command: |
             mkdir /tmp/test-results
-            TEST_FILES="$(circleci tests glob "spec/**/*_spec.rb" | circleci tests split --split-by=timings)"
-            
-            bundle exec rspec --format progress \
-                            --format RspecJunitFormatter \
-                            --out /tmp/test-results/rspec.xml \
-                            --format progress \
-                            $TEST_FILES
+            deep-cover exec rspec
 
       # collect reports
       - store_test_results:
-          path: /tmp/test-results
+          path: ~/repo/coverage/
       - store_artifacts:
-          path: /tmp/test-results
+          path: ~/repo/coverage/
           destination: test-results
