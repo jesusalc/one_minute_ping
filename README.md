@@ -1,3 +1,4 @@
+[![Pipeline Status](https://gitlab.com/jesusalc/one_minute_test/badges/master/pipeline.svg)](https://gitlab.com/jesusalc/one_minute_test/commits/master)
 [![Travis CI Build Status](https://travis-ci.org/jesusalc/one_minute_ping.svg?branch=master)](https://travis-ci.org/jesusalc/one_minute_ping)
 [![Circle CI Build Status](https://circleci.com/gh/jesusalc/one_minute_ping.svg?style=shield&circle-token=:circle-token)](https://circleci.com/gh/jesusalc/one_minute_ping)
 [![Maintainability](https://api.codeclimate.com/v1/badges/c0cd66c2367b91434420/maintainability)](https://codeclimate.com/github/jesusalc/one_minute_ping/maintainability)
