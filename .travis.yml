@@ -3,3 +3,11 @@ language: ruby
 # deploy:
 #  provider: rubygems
 #  api_key: "YOUR API KEY"
+
+# notifications:
+#  email:
+#    recipients:
+#      - one@example.com
+#      - other@example.com
+#    on_success: never # default: change
+#    on_failure: always # default: always
