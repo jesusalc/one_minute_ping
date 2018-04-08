@@ -1,4 +1,5 @@
-[![Build Status](https://travis-ci.org/jesusalc/one_minute_ping.svg?branch=master)](https://travis-ci.org/jesusalc/one_minute_ping)
+[![Travis CI Build Status](https://travis-ci.org/jesusalc/one_minute_ping.svg?branch=master)](https://travis-ci.org/jesusalc/one_minute_ping)
+[![Circle CI Build Status](https://circleci.com/gh/jesusalc/one_minute_ping.svg?style=shield&circle-token=:circle-token)](https://circleci.com/gh/jesusalc/one_minute_ping)
 
 # One Minute Ping
 
