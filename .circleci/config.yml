@@ -20,11 +20,11 @@ jobs:
       - checkout
 
       # Download and cache dependencies
-      # - restore_cache:
-      #    keys:
-          # - v1-dependencies-{{ checksum "Gemfile.lock" }}
+      - restore_cache:
+          keys:
+          - v1-dependencies-{{ checksum "Gemfile.lock" }}
           # fallback to using the latest cache if no exact match is found
-          # - v1-dependencies-
+          - v1-dependencies-
 
       - run:
           name: install dependencies
@@ -45,11 +45,11 @@ jobs:
           name: run tests
           command: |
             mkdir /tmp/test-results
-            deep-cover exec rspec
+            bundle exec rake
 
       # collect reports
-      - store_test_results:
-          path: ~/repo/coverage/
-      - store_artifacts:
-          path: ~/repo/coverage/
-          destination: test-results
+      # - store_test_results:
+      #    path: ~/repo/coverage/
+      # - store_artifacts:
+      #    path: ~/repo/coverage/
+      #    destination: test-results
