@@ -5,6 +5,8 @@
 version: 2
 jobs:
   build:
+    environment:
+      CC_TEST_REPORTER_ID: ONE_MINUTE_PING_CC_TEST_REPORTER_ID
     docker:
       # specify the version you desire here
        - image: circleci/ruby:2.4.1-node-browsers
@@ -42,14 +44,51 @@ jobs:
 
       # run tests!
       - run:
-          name: run tests
+          name: Setup Code Climate test-reporter
           command: |
-            mkdir /tmp/test-results
-            bundle exec rake
-
+            curl -L https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64 > ./cc-test-reporter
+            chmod +x ./cc-test-reporter
+      # - run:
+      #    name: run tests
+      #    command: |
+      #      mkdir /tmp/test-results
+      #      bundle exec rake
+      - run:
+          name: Run tests
+          command: |
+            ./cc-test-reporter before-build
+            bundle exec rspec
+            ./cc-test-reporter after-build --coverage-input-type clover --exit-code $?
       # collect reports
       # - store_test_results:
       #    path: ~/repo/coverage/
       # - store_artifacts:
       #    path: ~/repo/coverage/
       #    destination: test-results
+#version: 2.0
+#jobs:
+#  build:
+#    environment:
+#      CC_TEST_REPORTER_ID: ONE_MINUTE_PING_CC_TEST_REPORTER_ID
+#    docker:
+#      - image: circleci/php:7.1.9-browsers
+#    working_directory: ~/repo
+#    steps:
+#      - checkout
+#      - run:
+#          name: Setup dependencies
+#          command: |
+#            sudo composer self-update
+#            composer install -n --prefer-dist
+#      - run:
+#          name: Setup Code Climate test-reporter
+#          command: |
+#            curl -L https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64 > ./cc-test-reporter
+#            chmod +x ./cc-test-reporter
+#      - run:
+#          name: Run tests
+#          command: |
+#            sudo docker-php-ext-enable xdebug
+#            ./cc-test-reporter before-build
+#            sudo vendor/bin/phpunit --coverage-clover clover.xml
+#            ./cc-test-reporter after-build --coverage-input-type clover --exit-code $?
