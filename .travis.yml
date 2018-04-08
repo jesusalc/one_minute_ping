@@ -1,5 +1,5 @@
 language: ruby
 
-deploy:
-  provider: rubygems
-  api_key: "YOUR API KEY"
+# deploy:
+#  provider: rubygems
+#  api_key: "YOUR API KEY"

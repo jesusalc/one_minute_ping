@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.org/jesusalc/one_minute_ping.svg?branch=master)](https://travis-ci.org/jesusalc/one_minute_ping)
+
 # One Minute Ping
 
 A small ruby gem that exposes a cli to check status of a website.
